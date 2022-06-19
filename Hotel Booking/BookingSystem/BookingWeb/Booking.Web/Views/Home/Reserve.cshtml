@@ -1,0 +1,69 @@
+﻿@model BookingWeb.Models.Reservation
+@{
+    ViewData["Title"] = "Sea Horizon";
+    var MaxNoOfPersons = Model.NoOfPersons;
+}
+
+<div class="assign my-5">
+    <div class="container">
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+          Maximum numbers of persons in @Model.Room.Type room is @Model.Room.MaxNoOfPersons persons.
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="card my-5">
+            <div class="card-body">
+                <form asp-controller="Cart" asp-action="AddToCart">
+                    <input type="hidden" asp-for="Room.Id" />
+                    <div class="form-group row justify-content-center">
+                        <label for="staticEmail" class="col-sm-2 col-form-label visitors-sel">NO Visitors</label>
+                        <div class="col-sm-3">
+                            <select class="form-control" asp-for="NoOfPersons">
+                                @for (int i = 0; i < Model.Room.MaxNoOfPersons; i++)
+                                {
+                                    <option value="@(i+1)">@(i+1)</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <label for="inputPassword" class="col-sm-2 col-form-label visitors-sel">Date From</label>
+                        <div class="col-sm-3">
+                            <input type="date"
+                            asp-for="DateFrom"
+                            id="StartDate"
+                            min="2001-01-01" max="2099-12-31">
+                        </div>
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <label for="inputPassword" class="col-sm-2 col-form-label visitors-sel">Date To</label>
+                        <div class="col-sm-3">
+                            <input type="date"
+                                asp-for="DateTo"
+                            id="EndDate"
+                            min="2001-01-01" max="2099-12-31">
+                        </div>
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <label for="inputPassword" class="col-sm-2 col-form-label visitors-sel">Price/Night</label>
+                        <div class="col-sm-3">
+                            <h2>@Model.Room.PricePerNight$</h2>
+                        </div>
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <label for="inputPassword" class="col-sm-2 col-form-label visitors-sel">Room Type</label>
+                        <div class="col-sm-3">
+                            <h2>@Model.Room.Type</h2>
+                        </div>
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <div class="col-sm-5">
+                            <button type="submit" class="btn btn-success">Add To Cart</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

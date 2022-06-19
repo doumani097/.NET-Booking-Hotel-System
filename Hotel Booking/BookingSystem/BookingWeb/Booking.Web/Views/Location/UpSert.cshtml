@@ -1,0 +1,71 @@
+﻿@model BookingWeb.Models.ViewModels.LocationUpsertVM
+
+@{
+    ViewData["Title"] = "Modify Locations";
+}
+
+<div class="container">
+     <form asp-action="UpSert" method="post" enctype="multipart/form-data">
+        <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="management-header my-5">
+                <h2 class="text-white text-center">Manage Locations</h2>
+            </div>    
+            <div class="card my-5">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label asp-for="Location.Country"></label>
+                        <input class="form-control" asp-for="Location.Country" />
+                        <span class="text-danger" asp-validation-for="Location.Country"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Location.City"></label>
+                        <input class="form-control" asp-for="Location.City" />
+                        <span class="text-danger" asp-validation-for="Location.City"></span>
+                    </div>
+                    @if(Model.Location != null){
+                        <div class="form-group">
+                            <label asp-for="HotelId"></label>
+                            <select class="form-control" asp-for="HotelId" asp-items="Model.Hotels">
+                                <option selected disabled>Select a Location</option>
+                            </select>
+                        </div>
+                    }
+                    <div class="form-group">
+                        <label asp-for="Location.Image"></label>
+                        <input type="file" asp-for="Location.Image" id="uploadBox" name="files" class="form-control"/>
+                    </div>
+                    @if(Model.Location != null)
+                    {
+                        var base64 = Convert.ToBase64String(Model.Location.Image);
+                        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                        <img src="@imgsrc" width="100%" />
+                        <input type="hidden" asp-for="Location.Id" />
+                        <button type="submit" class="btn btn-success">Update</button>   
+                    }else{
+                        <button onclick="return validateInput()" type="submit" class="btn btn-success">Create</button>   
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+     </form>
+</div>
+
+@section Scripts{
+    <partial  name="_ValidationScriptsPartial"/>
+        <script>
+
+        function validateInput() {
+            if (document.getElementById("uploadBox").value == "") {
+                Swal.fire(
+                    'Error!',
+                    'Please upload an Image!',
+                    'error'
+                )
+                return false;
+            }
+            return true;
+        }
+    </script>
+}

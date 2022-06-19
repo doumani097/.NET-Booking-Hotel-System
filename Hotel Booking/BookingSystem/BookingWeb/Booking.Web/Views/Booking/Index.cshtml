@@ -1,0 +1,42 @@
+﻿@model IList<BookingWeb.Models.Bookings>
+
+@{
+    ViewData["Title"] = "Manage Bookings";
+}
+<div class="container">
+<div class="management-header my-5">
+    <h2 class="text-white">Manage Bookings</h2>
+</div>
+@if(Model.Count() > 0){
+    <table class="table table-striped table-dark">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Total Price</th>
+          <th scope="col">Total Price After Discount</th>
+          <th scope="col">Booking Date</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach (var bookings in Model)
+        {
+            <tr>
+                <th scope="row">@bookings.Id</th>
+                <td>@bookings.TotalPrice</td>
+                <td>@bookings.TotalPriceAfterDiscount</td>
+                 <td>@bookings.CreatedAt.ToShortDateString()</td>
+                <td>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@bookings.Id">Delete</a>
+                <a class="btn btn-success" asp-action="Details" asp-route-id="@bookings.Id">Details</a>
+                </td>
+            </tr>
+        }
+      </tbody>
+    </table>
+}
+else
+{
+    <h4 class="text-white">There are no bookings availiable now...</h4>        
+}
+</div>

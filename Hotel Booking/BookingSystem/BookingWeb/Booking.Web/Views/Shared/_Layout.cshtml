@@ -1,0 +1,85 @@
+﻿@using BookingWeb.Models.ViewModels
+@using BookingWeb.Web.Utilities
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Full Hotel</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <!-- start navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">Full Hotel</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            @if (User.IsInRole("Admin"))
+            {
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Management Area
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" asp-controller="Hotel" asp-action="Index">Hotels</a>
+                        <a class="dropdown-item" asp-controller="Location" asp-action="Index">Locations</a>
+                        <a class="dropdown-item" asp-controller="Branch" asp-action="Index">Branches</a>
+                        <a class="dropdown-item" asp-controller="Room" asp-action="Index">Rooms</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" asp-controller="Reservation" asp-action="Index">Reservations</a>
+                        <a class="dropdown-item" asp-controller="Booking" asp-action="Index">Bookings</a>
+                    </div>
+                </li>
+            }
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    @if (HttpContextAccessor.HttpContext.Session.Get<List<ReservationVM>>("ReservationList") != null &&
+                        HttpContextAccessor.HttpContext.Session.Get<List<ReservationVM>>("ReservationList").Count() > 0)
+                    {
+                        var count = HttpContextAccessor.HttpContext.Session.Get<List<ReservationVM>>("ReservationList").Count;
+                        <a class="nav-link" asp-controller="Cart" asp-action="Index">Cart(@count)</a>       
+                    }
+                </li>
+                @if (HttpContextAccessor.HttpContext.Session.GetString("JWToken") != null &&
+                HttpContextAccessor.HttpContext.Session.GetString("JWToken").ToString().Length > 0)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-controller="Auth" asp-action="Logout">Logout</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-controller="Auth" asp-action="Login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-controller="Auth" asp-action="Register">Register</a>
+                    </li>
+                }
+            </ul>
+            </div>
+        </div>
+    </nav> 
+    <!-- end navbar-->
+    <div>
+        @RenderBody()
+    </div>
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,90 @@
+﻿@model BookingWeb.Models.ViewModels.BranchUpsertVM
+
+@{
+    ViewData["Title"] = "Modify Branches";
+}
+
+<div class="container">
+    <div class="row justify-content-center">  
+        <div class="col-md-6">
+            <div class="management-header my-5">
+                <h2 class="text-white text-center">Manage Branches</h2>
+            </div>    
+             <div class="card my-5">
+                <div class="card-body">
+                     <form asp-action="UpSert" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label asp-for="Branch.Name"></label>
+                            <input class="form-control" asp-for="Branch.Name" />
+                            <span class="text-danger" asp-validation-for="Branch.Name"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Branch.Street"></label>
+                            <input class="form-control" asp-for="Branch.Street" />
+                            <span class="text-danger" asp-validation-for="Branch.Street"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Branch.ZipCode"></label>
+                            <input class="form-control" asp-for="Branch.ZipCode" />
+                            <span class="text-danger" asp-validation-for="Branch.ZipCode"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Branch.EmailAddress"></label>
+                            <input class="form-control" asp-for="Branch.EmailAddress" />
+                            <span class="text-danger" asp-validation-for="Branch.EmailAddress"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Branch.PhoneNumber"></label>
+                            <input class="form-control" asp-for="Branch.PhoneNumber" />
+                            <span class="text-danger" asp-validation-for="Branch.PhoneNumber"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Branch.WebsiteLink"></label>
+                            <input class="form-control" asp-for="Branch.WebsiteLink" />
+                            <span class="text-danger" asp-validation-for="Branch.WebsiteLink"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Branch.HotelLocationId"></label>
+                            <select class="form-control" asp-for="Branch.HotelLocationId" asp-items="Model.HotelLocations">
+                                <option selected disabled>Select Hotel Location</option>
+                            </select>
+                            <span class="text-danger" asp-validation-for="Branch.HotelLocationId"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Branch.Image"></label>
+                            <input type="file" id="uploadBox" asp-for="Branch.Image" name="files" class="form-control"/>
+                        </div>
+                        @if(Model.Branch.Image != null)
+                        {
+                            var base64 = Convert.ToBase64String(Model.Branch.Image);
+                            var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                            <img src="@imgsrc" width="100%" />
+                            <input type="hidden" asp-for="Branch.Id" />
+                            <button type="submit" class="btn btn-success">Update</button>   
+                        }else{
+                            <button onclick="return validateInput()" type="submit" class="btn btn-success">Create</button>   
+                        }
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <partial  name="_ValidationScriptsPartial"/>
+        <script>
+
+        function validateInput() {
+            if (document.getElementById("uploadBox").value == "") {
+                Swal.fire(
+                    'Error!',
+                    'Please upload an Image!',
+                    'error'
+                )
+                return false;
+            }
+            return true;
+        }
+    </script>
+}

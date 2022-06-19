@@ -1,0 +1,12 @@
+C:\Users\moham\OneDrive\Desktop\Hotel Booking\BookingSystem\BookingAPI\Booking.Models\bin\Debug\net5.0\Booking.Models.deps.json
+C:\Users\moham\OneDrive\Desktop\Hotel Booking\BookingSystem\BookingAPI\Booking.Models\bin\Debug\net5.0\Booking.Models.dll
+C:\Users\moham\OneDrive\Desktop\Hotel Booking\BookingSystem\BookingAPI\Booking.Models\bin\Debug\net5.0\Booking.Models.pdb
+C:\Users\moham\OneDrive\Desktop\Hotel Booking\BookingSystem\BookingAPI\Booking.Models\obj\Debug\net5.0\Booking.Models.csproj.AssemblyReference.cache
+C:\Users\moham\OneDrive\Desktop\Hotel Booking\BookingSystem\BookingAPI\Booking.Models\obj\Debug\net5.0\Booking.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\moham\OneDrive\Desktop\Hotel Booking\BookingSystem\BookingAPI\Booking.Models\obj\Debug\net5.0\Booking.Models.AssemblyInfoInputs.cache
+C:\Users\moham\OneDrive\Desktop\Hotel Booking\BookingSystem\BookingAPI\Booking.Models\obj\Debug\net5.0\Booking.Models.AssemblyInfo.cs
+C:\Users\moham\OneDrive\Desktop\Hotel Booking\BookingSystem\BookingAPI\Booking.Models\obj\Debug\net5.0\Booking.Models.csproj.CoreCompileInputs.cache
+C:\Users\moham\OneDrive\Desktop\Hotel Booking\BookingSystem\BookingAPI\Booking.Models\obj\Debug\net5.0\Booking.Models.dll
+C:\Users\moham\OneDrive\Desktop\Hotel Booking\BookingSystem\BookingAPI\Booking.Models\obj\Debug\net5.0\refint\Booking.Models.dll
+C:\Users\moham\OneDrive\Desktop\Hotel Booking\BookingSystem\BookingAPI\Booking.Models\obj\Debug\net5.0\Booking.Models.pdb
+C:\Users\moham\OneDrive\Desktop\Hotel Booking\BookingSystem\BookingAPI\Booking.Models\obj\Debug\net5.0\ref\Booking.Models.dll

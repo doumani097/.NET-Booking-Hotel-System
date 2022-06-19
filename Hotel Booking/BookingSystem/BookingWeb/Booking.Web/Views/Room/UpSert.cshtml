@@ -1,0 +1,75 @@
+﻿@model BookingWeb.Models.ViewModels.RoomUpsertVM
+
+@{
+    ViewData["Title"] = "Modify Rooms";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="management-header my-5">
+                <h2 class="text-white text-center">Manage Rooms</h2>
+            </div>    
+            <div class="card my-5">
+                <div class="card-body">
+                     <form asp-action="UpSert" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label asp-for="Room.Type"></label>
+                            <input class="form-control" asp-for="Room.Type" />
+                            <span class="text-danger" asp-validation-for="Room.Type"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Room.MaxNoOfPersons"></label>
+                            <input class="form-control" asp-for="Room.MaxNoOfPersons" />
+                            <span class="text-danger" asp-validation-for="Room.MaxNoOfPersons"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Room.PricePerNight"></label>
+                            <input class="form-control" asp-for="Room.PricePerNight" />
+                            <span class="text-danger" asp-validation-for="Room.PricePerNight"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Room.BranchId"></label>
+                            <select class="form-control" asp-for="Room.BranchId" asp-items="Model.Branches">
+                                <option selected disabled>Select Branch</option>
+                            </select>
+                            <span class="text-danger" asp-validation-for="Room.BranchId"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Room.Image"></label>
+                            <input type="file" id="uploadBox" asp-for="Room.Image" name="files" class="form-control"/>
+                        </div>
+                        @if(Model.Room.Image != null)
+                        {
+                            var base64 = Convert.ToBase64String(Model.Room.Image);
+                            var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                            <img src="@imgsrc" width="100%" />
+                            <input type="hidden" asp-for="Room.Id" />
+                            <button type="submit" class="btn btn-primary">Update</button>   
+                        }else{
+                            <button onclick="return validateInput()" type="submit" class="btn btn-primary">Create</button>   
+                        }
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+</div>
+@section Scripts{
+    <partial  name="_ValidationScriptsPartial"/>
+        <script>
+
+        function validateInput() {
+            if (document.getElementById("uploadBox").value == "") {
+                Swal.fire(
+                    'Error!',
+                    'Please upload an Image!',
+                    'error'
+                )
+                return false;
+            }
+            return true;
+        }
+    </script>
+}

@@ -1,0 +1,48 @@
+﻿@model IList<BookingWeb.Models.Branch>
+
+@{
+    ViewData["Title"] = "Manage Branches";
+}
+<div class="container">
+<div class="management-header my-5">
+    <h2 class="text-white float-left">Manage Branches</h2>
+    <a class="btn btn-success float-right" asp-action="Upsert">Create New Branch</a>
+    <div class="clearfix"></div>
+</div>
+@if(Model.Count() > 0){
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Street</th>
+          <th scope="col">Zip Code</th>
+          <th scope="col">Phone Number</th>
+          <th scope="col">Email Address</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach (var branch in Model)
+        {
+            <tr>
+                <th scope="row">@branch.Id</th>
+                <td>@branch.Name</td>
+                <td>@branch.Street</td>
+                <td>@branch.ZipCode</td>
+                <td>@branch.PhoneNumber</td>
+                <td>@branch.EmailAddress</td>
+                <td>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@branch.Id">Delete</a>
+                <a class="btn btn-primary" asp-action="Upsert" asp-route-id="@branch.Id">Edit</a>
+                </td>
+            </tr>
+        }
+      </tbody>
+    </table>
+}
+else
+{
+    <h4 class="text-white">There are no branches availiable now...</h4>        
+}
+</div>

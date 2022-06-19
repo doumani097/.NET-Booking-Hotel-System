@@ -1,0 +1,37 @@
+﻿@model IList<BookingWeb.Models.Branch>
+@{
+    ViewData["Title"] = "Sea Horizon";
+}
+
+<div class="branches my-5">
+    <div class="container">
+        <div class="row mt-5">
+            @if(Model.Count() > 0)
+            {
+                @foreach (var branch in Model)
+                {
+                    <div class="col-md-4">
+                        <div class="card mt-3">
+                            @{
+                                var base64 = Convert.ToBase64String(@branch.Image);
+                                var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                            }
+                            <img src="@imgsrc" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">@branch.Name</h5>
+                                <p class="card-text">@branch.Street</p>
+                                <p class="card-text">@branch.PhoneNumber</p>
+                                <p class="card-text">@branch.EmailAddress</p>
+                                <a asp-action="Rooms" asp-route-branchId="@branch.Id" class="btn btn-primary">Available Rooms</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <h2>There are no branches available now in this location...</h2>
+            }
+        </div>
+    </div>
+</div>

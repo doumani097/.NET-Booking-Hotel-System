@@ -1,0 +1,15 @@
+﻿@model IList<BookingWeb.Models.Hotel>
+@{
+    ViewData["Title"] = "Full Hotel";
+}
+
+<div class="img-overlay">
+    <div class="container">
+        <div class="main-content">
+            <h1>Full Hotel</h1>
+            <p class="mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo debitis, eius obcaecati laboriosam ipsa numquam esse.</p>
+            <a class="main-btn" asp-action="OurLocations" asp-route-id="@Model[0].Id">Booking Now</a>
+        </div>
+    </div>
+</div>
+

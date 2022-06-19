@@ -1,0 +1,55 @@
+﻿@model IList<BookingWeb.Models.Reservation>
+
+@{
+    ViewData["Title"] = "Manage Reservations";
+}
+<div class="container">
+<div class="management-header my-5">
+    <h2 class="text-white">Manage Reservations</h2>
+</div>
+@if(Model.Count() > 0){
+    <table class="table table-striped table-dark">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Full Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Room ID</th>
+          <th scope="col">Room Type</th>
+          <th scope="col">No Of Persons</th>
+          <th scope="col">Total Price</th>
+          <th scope="col">Date From</th>
+          <th scope="col">Date To</th>
+          <th scope="col">Reservation Date</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach (var reservation in Model)
+        {
+            <tr>
+                <th scope="row">@reservation.Id</th>
+                <td>@reservation.ContactInformation.FirstName @reservation.ContactInformation.MidName @reservation.ContactInformation.LastName</td>
+                <td>@reservation.ContactInformation.EmailAddress</td>
+                <td>@reservation.ContactInformation.PhoneNumber</td>
+                <td>@reservation.Room.Id</td>
+                <td>@reservation.Room.Type</td>
+                <td>@reservation.NoOfPersons</td>
+                <td>@reservation.TotalPrice</td>
+                <td>@reservation.DateFrom.ToShortDateString()</td>
+                <td>@reservation.DateTo.ToShortDateString()</td>
+                <td>@reservation.CreatedAt.ToShortDateString()</td>
+                <td>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@reservation.Id">Delete</a>
+                </td>
+            </tr>
+        }
+      </tbody>
+    </table>
+}
+else
+{
+    <h4 class="text-white">There are no reservations availiable now...</h4>        
+}
+</div>

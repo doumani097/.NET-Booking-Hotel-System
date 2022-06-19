@@ -1,0 +1,63 @@
+﻿@model BookingWeb.Models.Hotel
+
+@{
+    ViewData["Title"] = "Modify Hotels";
+}
+
+<div class="container">
+    <div class="row justify-content-center my-3">
+        <div class="col-md-6">
+            <div class="management-header my-5">
+                <h2 class="text-white text-center">Manage Hotels</h2>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                     <form asp-action="UpSert" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label asp-for="Name"></label>
+                            <input class="form-control" asp-for="Name" />
+                            <span class="text-danger" asp-validation-for="Name"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Summary"></label>
+                            <textarea class="form-control" asp-for="Summary"></textarea>
+                            <span class="text-danger" asp-validation-for="Summary"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Image"></label>
+                            <input type="file" asp-for="Image" id="uploadBox" name="files" class="form-control"/>
+                        </div>
+                        @if(Model != null)
+                        {
+                            var base64 = Convert.ToBase64String(Model.Image);
+                            var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                            <img src="@imgsrc" width="100%" />
+                            <input type="hidden" asp-for="Id" />
+                            <button type="submit" class="btn btn-success">Update</button>   
+                        }else{
+                            <button onclick="return validateInput()" type="submit" class="btn btn-success">Create</button>   
+                        }
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <partial  name="_ValidationScriptsPartial"/>
+        <script>
+
+        function validateInput() {
+            if (document.getElementById("uploadBox").value == "") {
+                Swal.fire(
+                    'Error!',
+                    'Please upload an Image!',
+                    'error'
+                )
+                return false;
+            }
+            return true;
+        }
+    </script>
+}

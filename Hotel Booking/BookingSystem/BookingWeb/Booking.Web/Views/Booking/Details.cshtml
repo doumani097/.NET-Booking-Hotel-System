@@ -1,0 +1,36 @@
+﻿@model BookingWeb.Models.Bookings
+
+@{
+    ViewData["Title"] = "Booking Details";
+}
+
+<div class="container my-5">
+    <div class="row">
+        @if (Model.Reservations.Count > 0)
+        {
+            @foreach (var reservation in Model.Reservations)
+            {
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Contact Information</h4>
+                            <p>First Name: @reservation.ContactInformation.FirstName</p>
+                            <p>Middle Name: @reservation.ContactInformation.MidName</p>
+                            <p>Last Name: @reservation.ContactInformation.LastName</p>
+                            <p>Email: @reservation.ContactInformation.EmailAddress</p>
+                            <p>Phone: @reservation.ContactInformation.PhoneNumber</p>
+                            <hr/>
+                            <h4>Room Details</h4>
+                            <p>Branch: @reservation.Room.Branch.Name</p>
+                            <p>Room: @reservation.Room.Type</p>
+                            <p>Max Persons: @reservation.Room.MaxNoOfPersons</p>
+                            <p>Price/Night: @reservation.Room.PricePerNight</p>
+                            <hr/>
+                            <p>Total Price: @Model.TotalPrice</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

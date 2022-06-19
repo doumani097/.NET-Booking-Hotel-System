@@ -1,0 +1,33 @@
+﻿@model BookingWeb.Models.ViewModels.ShowLocationsVM
+@{
+    ViewData["Title"] = "Sea Horizon";
+}
+<div class="locations my-5">
+        <div class="container">
+            <h2 class="locations-head">We're in</h2>
+
+            @if(Model.Locations.Count() > 0)
+            {
+                <div class="row mt-5">
+                    @foreach (var location in Model.Locations)
+                    {
+                    <div class="col-md-4">
+                        <div class="fullwrap mt-3">
+                            @{
+                                var base64 = Convert.ToBase64String(@location.Image);
+                                var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                             }
+                            <img src="@imgsrc"/>
+                            <div class="fullcap">
+                                <a asp-action="Branches" asp-route-hotelId="@Model.HotelId" 
+                                asp-route-locationId="@location.Id">@location.City</a>
+                            </div>
+                        </div>
+                    </div>   
+                    }
+                </div>   
+            }else{
+                <h2 class="locations-head">There are no locations available now...</h2>
+            }
+        </div>
+    </div>
